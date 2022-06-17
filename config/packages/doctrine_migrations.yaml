@@ -1,0 +1,8 @@
+doctrine_migrations:
+    migrations_paths:
+        'DoctrineMigrationsFidelity': '%kernel.project_dir%/migrations'
+
+#    dir_name: '%kernel.project_dir%/src/Migrations'
+#    # namespace is arbitrary but should be different from App\Migrations
+#    # as migrations classes should NOT be autoloaded
+#    namespace: DoctrineMigrations

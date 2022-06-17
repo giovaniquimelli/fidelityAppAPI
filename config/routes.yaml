@@ -1,0 +1,31 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+web_route_vue_app:
+    methods: GET|HEAD
+    path: /app/{req}
+    controller: App\Controller\WebController::vueApp
+    requirements:
+        req: ".*"
+
+web_route_vue_js:
+    methods: GET|HEAD
+    path: /js/{req}
+    controller: App\Controller\WebController::jsFiles
+    requirements:
+        req: ".*"
+
+web_route_vue_css:
+    methods: GET|HEAD
+    path: /css/{req}
+    controller: App\Controller\WebController::cssFiles
+    requirements:
+        req: ".*"
+
+web_route_vue_img:
+    methods: GET|HEAD
+    path: /img/{req}
+    controller: App\Controller\WebController::imgFiles
+    requirements:
+        req: ".*"

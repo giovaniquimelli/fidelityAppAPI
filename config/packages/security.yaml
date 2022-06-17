@@ -1,0 +1,46 @@
+security:
+    encoders:
+        App\Entity\Fidelity\Users:
+            algorithm: auto
+        App\Entity\Fidelity\Account:
+            algorithm: auto
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # users_in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: App\Entity\Fidelity\Users
+                property: email
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt))/
+            security: false
+        pos_desktop:
+            pattern: ^/api/pos/(?!licence/)
+            anonymous: false
+            stateless: true
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - api_pos_token_authenticator
+        main:
+            lazy: true
+            pattern: ^/(app|js|css|api/web/gateway)
+            anonymous: false
+            guard:
+                authenticators:
+                    - login_form_web_authenticator
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/app/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/(app|js|css), roles: ROLE_USER }
+        - { path: ^/api/web/gateway, roles: ROLE_USER }

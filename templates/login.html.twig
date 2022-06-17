@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="https://cdn.materialdesignicons.com/4.5.95/css/materialdesignicons.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+            <style>
+                body {
+                    background-color: rgba(46, 51, 68, 0.98)
+                }
+
+                .card-login {
+                    width: 300px;
+                    margin: 30px auto;
+                }
+
+                .inputs {
+                    padding-top: 0px !important;
+                }
+
+                .row-clear {
+                    margin-bottom: 0px !important;
+                }
+
+                .copyright {
+                    font-size: 0.7em;
+                }
+
+                .invalid-credential {
+                    padding: 2px;
+                    border-radius: 2px;
+                    border: 1px solid #842834;
+                    background-color: #ffb7b3;
+                    color: #222222;
+                }
+
+                @-webkit-keyframes rotating /* Safari and Chrome */ {
+                    from {
+                        -webkit-transform: rotate(0deg);
+                        -o-transform: rotate(0deg);
+                        transform: rotate(0deg);
+                    }
+                    to {
+                        -webkit-transform: rotate(360deg);
+                        -o-transform: rotate(360deg);
+                        transform: rotate(360deg);
+                    }
+                }
+                @keyframes rotating {
+                    from {
+                        -ms-transform: rotate(0deg);
+                        -moz-transform: rotate(0deg);
+                        -webkit-transform: rotate(0deg);
+                        -o-transform: rotate(0deg);
+                        transform: rotate(0deg);
+                    }
+                    to {
+                        -ms-transform: rotate(360deg);
+                        -moz-transform: rotate(360deg);
+                        -webkit-transform: rotate(360deg);
+                        -o-transform: rotate(360deg);
+                        transform: rotate(360deg);
+                    }
+                }
+                .rotating {
+                    -webkit-animation: rotating 2s linear infinite;
+                    -moz-animation: rotating 2s linear infinite;
+                    -ms-animation: rotating 2s linear infinite;
+                    -o-animation: rotating 2s linear infinite;
+                    animation: rotating 2s linear infinite;
+                }
+            </style>
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        <form method="post" id="form-app">
+            <div class="row">
+                <div class="card darken-1 z-depth-3 card-login">
+                    <div class="card-content center">
+                        <img src="{{ asset('static/img/logo_lobo.svg') }}" alt="" style="height: 64px">
+                    </div>
+                    <div class="card-content center inputs">
+                        <p>Painel de Administração</p>
+                    </div>
+                    <div class="card-content inputs">
+                        <div class="input-field">
+                            <input id="username" name="_email" type="email" required autocomplete="username">
+                            <label for="username">Usuário</label>
+                        </div>
+                        <div class="input-field">
+                            <input id="password" name="_password" type="password" required autocomplete="current-password">
+                            <label for="password">Password</label>
+                        </div>
+                        {% if error %}
+                            <div class="row invalid-credential">
+                                Credencial inválida.
+                            </div>
+                        {% endif %}
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                        <div class="black-text">
+                            <a href="/api/web/auth/forgot-password">Esqueceu a Senha?</a>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <div class="row">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <input type="hidden" name="_csrf_token2" value="{{ csrf_token('authenticate2') }}">
+                            <button type="submit" class="btn waves-effect waves-light orange col s12">Entrar
+                                <i class="right mdi mdi-send"></i>
+                            </button>
+                            <button style="display: none" type="button" class="btn waves-effect waves-light orange col s12">Logando
+                                <i class="right mdi mdi-circle-slice-1 rotating"></i>
+                            </button>
+                        </div>
+                        <div class="row row-clear copyright">
+                            Fidelity Club &copy; {{ date().format('Y') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {% block javascripts %}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        {% endblock %}
+    </body>
+</html>

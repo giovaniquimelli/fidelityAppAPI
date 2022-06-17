@@ -1,0 +1,75 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    web.cookie_name: '__WEB_SESSID'
+    web.auth_token.timeout: 60
+    web.token_guard.token: 'web_token'
+
+    mobile.account.token_guard.user: 'account'
+    mobile.account.token_guard.token: 'account_token'
+    mobile.account.auth_token.timeout: 30
+
+    sys_root_id: '00000000-0000-0000-0000-000000000001'
+    sys_web_id: '00000000-0000-0000-0000-000000000002'
+    sys_mobile_id: '00000000-0000-0000-0000-000000000003'
+    sys_service_id: '00000000-0000-0000-0000-000000000004'
+    sys_pos_id: '00000000-0000-0000-0000-000000000005'
+    # container.dumper.inline_factories: true
+    # container.dumper.inline_class_loader: true
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
+        arguments:
+            - '%env(DATABASE_URL_ADMIN)%'
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    app_util_container_service:
+        class: App\Util\Container\ContainerService
+        arguments: ['@service_container']
+        autowire: true
+
+    #region AUTHENTICATORS
+    login_form_web_authenticator:
+        class: App\Security\LoginFormWebAuthenticator
+        autowire: true
+
+    api_pos_token_authenticator:
+        class: App\Security\ApiPosTokenAuthenticator
+        autowire: true
+    #endregion
+
+    #region NORMALIZE
+    uuid_normalizer:
+        class: App\Doctrine\Normalizers\UuidNormalizer
+        tags:
+            - { name: serializer.normalizer }
+
+    date_normalizer:
+        class: App\Doctrine\Normalizers\DateNormalizer
+        tags:
+            - { name: serializer.normalizer }
+
+    datetime_normalizer:
+        class: App\Doctrine\Normalizers\DateTimeNormalizer
+        tags:
+            - { name: serializer.normalizer }
+    #endregion END NORMALIZER
