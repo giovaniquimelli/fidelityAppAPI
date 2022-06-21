@@ -3,7 +3,7 @@
 API built for Fidelity Point Card - Mobile App.
 All requests (except for registration and authentication) use the POST method and go through the API's gateway service which can manage multiple requests at once.
 
-## API Reference
+## API Reference - Account
 
 #### Register new Account
 
@@ -75,6 +75,33 @@ All requests (except for registration and authentication) use the POST method an
 | :-------- | :------- | :-------------------------------- |
 | `mainAccountId` | `string` | **Required**. User account ID |
 | `chosenAccountId` | `string` | **Required**. ID of the account the user has previously shared his own card to before |
+| `token` | `string` | **Required**. API token |
+
+## API Reference - Transactions
+
+#### Get all transaction records
+
+```http
+  POST /alltransactionrecords/get
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `accountId` | `string` | **Required**. User account ID |
+| `itemsToLoad` | `int` | **Required**. Pagination quantity |
+| `firstItem` | `int` | **Required**. Pagination's first item |
+| `type` | `int` | **Required**. Transaction type. 1 = purchase, -1 = exchanges, 0 = all |
+| `token` | `string` | **Required**. API token |
+
+#### Get all transaction records
+
+```http
+  POST /pointssum/get
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `accountId` | `string` | **Required**. User account ID |
 | `token` | `string` | **Required**. API token |
 
 
