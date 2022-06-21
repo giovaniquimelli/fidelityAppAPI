@@ -142,4 +142,15 @@ All gateway routes are auto generated on every migration in both Dart and TypeSc
 | `companyBranchId` | `string` | **Required**. Chosen company branch id|
 | `token` | `string` | **Required**. API token |
 
+## API Reference - Company Branch
+
+#### Get all company branches
+
+```http
+  POST /allcompanybranches/get
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `token` | `string` | **Required**. API token |
 
