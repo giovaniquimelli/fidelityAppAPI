@@ -90,7 +90,7 @@ All gateway routes are auto generated on every migration in both Dart and TypeSc
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
 | `accountId` | `string` | **Required**. User account ID |
-| `itemsToLoad` | `int` | **Required**. Pagination quantity |
+| `itemsToLoad` | `int` | **Required**. Pagination ammount |
 | `firstItem` | `int` | **Required**. Pagination's first item |
 | `type` | `int` | **Required**. Transaction type. 1 = purchases, -1 = exchanges, 0 = all |
 | `token` | `string` | **Required**. API token |
@@ -106,6 +106,40 @@ All gateway routes are auto generated on every migration in both Dart and TypeSc
 | `accountId` | `string` | **Required**. User account ID |
 | `token` | `string` | **Required**. API token |
 
+## API Reference - Reward
 
+#### Get all Rewards
+
+```http
+  POST /allmobilerewards/get
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `token` | `string` | **Required**. API token |
+
+#### Get all branches that have a specific reward in stock
+
+```http
+  POST /allbranchesbyreward/get
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `reward` | `Reward` | **Required**. Chosen reward |
+| `token` | `string` | **Required**. API token |
+
+#### Make points to reward exchange
+
+```http
+  POST /exchange/make
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `accountId` | `string` | **Required**. User account id|
+| `rewardId` | `string` | **Required**. Chosen reward id|
+| `companyBranchId` | `string` | **Required**. Chosen company branch id|
+| `token` | `string` | **Required**. API token |
 
 
