@@ -90,7 +90,7 @@ All requests (except for registration and authentication) use the POST method an
 | `accountId` | `string` | **Required**. User account ID |
 | `itemsToLoad` | `int` | **Required**. Pagination quantity |
 | `firstItem` | `int` | **Required**. Pagination's first item |
-| `type` | `int` | **Required**. Transaction type. 1 = purchase, -1 = exchanges, 0 = all |
+| `type` | `int` | **Required**. Transaction type. 1 = purchases, -1 = exchanges, 0 = all |
 | `token` | `string` | **Required**. API token |
 
 #### Get all transaction records
