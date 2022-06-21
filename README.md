@@ -95,7 +95,7 @@ All gateway routes are auto generated on every migration in both Dart and TypeSc
 | `type` | `int` | **Required**. Transaction type. 1 = purchases, -1 = exchanges, 0 = all |
 | `token` | `string` | **Required**. API token |
 
-#### Get all transaction records
+#### Get user's point sum
 
 ```http
   POST /pointssum/get
@@ -129,7 +129,7 @@ All gateway routes are auto generated on every migration in both Dart and TypeSc
 | `reward` | `Reward` | **Required**. Chosen reward |
 | `token` | `string` | **Required**. API token |
 
-#### Make points to reward exchange
+#### Make exchange
 
 ```http
   POST /exchange/make
