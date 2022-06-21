@@ -1,7 +1,8 @@
 
 #  Fidelity Point Card - API
 API built for Fidelity Point Card - Mobile App.
-All requests (except for registration and authentication) use the POST method and go through the API's gateway service which can manage multiple requests at once.
+All requests (except registration and authentication) use the POST method and go through the API's gateway service which can manage multiple requests at once.
+All objects can be auto generated from the Entity folder to Dart and TypeScript. 
 
 ## API Reference - Account
 
