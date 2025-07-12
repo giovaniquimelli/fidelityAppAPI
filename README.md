@@ -1,6 +1,4 @@
-
-#  Fidelity Point Card - API
-API built for the Fidelity Point Card.
+#  Point Card App - API
 
 All requests (except registration and authentication) use the POST method and go through the API's gateway service which can manage multiple requests at once.
 
